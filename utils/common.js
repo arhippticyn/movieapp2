@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const request = async ({url, params}) => {
     const options = {
         method: "GET",
@@ -12,7 +14,8 @@ export const request = async ({url, params}) => {
       };
 
       const { data } = await axios.request(options);
+      
       return data;
 }
 
-export const getIdFromKey = (str) => str.split('/')[Z];
+export const getIdFromKey = (str) => str.split('/')[2];
