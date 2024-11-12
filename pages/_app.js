@@ -13,6 +13,7 @@ function MyApp({ Component, pageProps }) {
 
     useEffect(() => {
         if (!items?.length) setItems(pageProps.data)
+        console.log(items);
     }, [pageProps.data, setItems, items]);
     
     return (
