@@ -6,6 +6,7 @@ import { BASE_URL } from '../utils/constants';
 import { useAppStore } from '../store/store';
 import { useEffect } from 'react';
 import axios from "axios";
+import Head from 'next/head';
 
 
 function MyApp({ Component, pageProps }) {
@@ -18,6 +19,11 @@ function MyApp({ Component, pageProps }) {
     
     return (
         <div className={styles.container}> 
+        <Head>
+            <title>The best movie APP</title>
+            <meta name="description" content="Movie app" />
+        <link rel="icon" href="/favicon.ico" />
+          </Head>
             <Component {...pageProps} />
             <Footer />
         </div>
