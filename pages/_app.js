@@ -18,15 +18,19 @@ function MyApp({ Component, pageProps }) {
     }, [pageProps.data, setItems, items]);
     
     return (
-        <div className={styles.container}> 
-        <Head>
-            <title>The best movie APP</title>
-            <meta name="description" content="Movie app" />
+        <div className={styles.container}>
+      <Head>
+        <title>The best movie APP</title>
+        <meta name="description" content="Movie app" />
         <link rel="icon" href="/favicon.ico" />
-          </Head>
-            <Component {...pageProps} />
-            <Footer />
-        </div>
+      </Head>
+
+      <main className={styles.main}>
+        <Component {...pageProps} />
+
+        <Footer />
+      </main>
+    </div>
     );
 }
 

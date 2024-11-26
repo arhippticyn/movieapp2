@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from '../styles/Movie.module.css'
 import Image from "next/image";
 import movieImg from '../images/default-movie.jpg'
 import { convertDuration }  from "..//utils/common"
 
-const MovieItem = ({ title: { title, image, year, runningTimeInMinutes: duration }, ratings: { rating }}) => {
-    return <div className={styles.movie}>
-      <div className={styles.item}>
+const MovieItem = ({ title: { title, image, year, runningTimeInMinutes: duration },
+   ratings: { rating }, 
+   plotSummary: plot, 
+   plotOutline: shortPlot,
+   genres,
+  }) => {
+  const [isOpen, setOpen] = useState(false)
+
+    return (<div className={styles.movie}>
         <div className={styles.title}>
             <h1 className={styles.h1}>{title}</h1>
             {rating && (
@@ -30,12 +36,29 @@ const MovieItem = ({ title: { title, image, year, runningTimeInMinutes: duration
         <div className={styles.info}>
           <div className={styles.about}>
             {year &&  <div className={styles.year}>{year}</div>}
-            {duration &&  <div className={styles.duration}>{convertDuration(duration)}</div>}
+            {duration &&  (<div className={styles.duration}>
+              {convertDuration(duration)}
+              </div>
+              )}
           </div>
+
+
+         <div className={styles.plot}>{plot?.text || shortPlot?.text}</div>
+
+         <div className={styles.genres}>
+          {genres.map((genre) => (
+            <div key={genre} className={styles.genre} onClick={() => {}}>
+              {genre}
+            </div>
+          ))}
+         </div>
         </div>
         </div>
-       </div>
-    </div>
+
+        <div className={styles.more} onClick={() => setOpen(!isOpen)}>
+        {isOpen ? "Hide info" : "View more info"}
+      </div>
+       </div>)
 }
 
 export default MovieItem
