@@ -3,8 +3,12 @@ import styles from '../styles/Movie.module.css'
 import Image from "next/image";
 import movieImg from '../images/default-movie.jpg'
 import { convertDuration }  from "..//utils/common"
+import Cast from "./Cast";
+import Reviews from "./Reviews";
 
-const MovieItem = ({ title: { title, image, year, runningTimeInMinutes: duration },
+const MovieItem = ({ 
+  id,
+  title: { title, image, year, runningTimeInMinutes: duration },
    ratings: { rating }, 
    plotSummary: plot, 
    plotOutline: shortPlot,
@@ -55,6 +59,12 @@ const MovieItem = ({ title: { title, image, year, runningTimeInMinutes: duration
         </div>
         </div>
 
+        {isOpen && (
+          <>
+          <Cast id={id} />
+          <Reviews />
+          </>
+        )}
         <div className={styles.more} onClick={() => setOpen(!isOpen)}>
         {isOpen ? "Hide info" : "View more info"}
       </div>
