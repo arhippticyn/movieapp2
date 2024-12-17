@@ -60,11 +60,11 @@ const MovieItem = ({
         </div>
 
         {isOpen && (
-          <>
+        <>
           <Cast id={id} />
-          <Reviews />
-          </>
-        )}
+          <Reviews id={id} />
+        </>
+      )}
         <div className={styles.more} onClick={() => setOpen(!isOpen)}>
         {isOpen ? "Hide info" : "View more info"}
       </div>

@@ -20,8 +20,10 @@ export const request = async ({ url, params = {} }) => {
 export const getIdFromKey = (str) => str.split("/")[2];
 
 export const convertDuration = (total) => {
-  const minutes = total % 60
-  const hours = Math.floor(total / 60)
+  const minutes = total % 60;
+  const hours = Math.floor(total / 60);
 
-  return `${hours}h ${minutes}m`
-}
+  return `${hours}h ${minutes}m`;
+};
+
+export const getRandom = (max) => Math.floor(Math.random() * max);
