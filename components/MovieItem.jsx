@@ -31,10 +31,13 @@ const MovieItem = ({
         <Image
             src={image ? image.url : movieImg}
             alt={title}
-            width={image ? image.width : "300"}
-            height={image ? image.height : "300"}
+            width={image ? image.width : 300}
+            height={image ? image.height : 450} 
             quality="0.5"
+            layout="intrinsic" 
           />
+
+
         </div>
 
         <div className={styles.info}>

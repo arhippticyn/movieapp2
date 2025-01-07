@@ -11,7 +11,7 @@ export default function Movie({ movie }) {
         <title>{movie.title.title}</title>
       </Head>
 
-      {/* <GetButton /> */}
+      <GetButton />
       <MovieItem {...movie} />
     </>
   );

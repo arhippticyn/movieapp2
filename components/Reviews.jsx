@@ -2,67 +2,92 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../utils/constants";
 import { getIdFromKey } from "../utils/common";
-import styles from "../styles/Reviews.module.css"
+import styles from "../styles/Reviews.module.css";
 
 const Reviews = ({ id }) => {
-    const [reviews, setReviews] = useState([]);
-  
-    useEffect(() => {
-        const fetchReviews = async () => {
-            const { data } = await axios.get(`${BASE_URL}/api/reviews?id=${getIdFromKey(id)}`);
-            
-            
-        };
+  const [reviews, setReviews] = useState([]);
+  const [isPending, setPending] = useState(false);
 
-      
-        fetchReviews();
-      }, [id]);
-      
-  
-      if (!reviews || !reviews.length) return "loading...";
-  
-    return (
-      <div className={styles.list}>
-        <h2>Reviews</h2>
-  
-        {reviews?.length ? (
-          <div className={styles.container}>
-            <div className={styles.reviews}>
-                {reviews.map(({ author: { displayName, userId }, authorRating, reviewText, reviewTitle, submissionDate }) => {
-                    <div className={styles.review} key={userId}>
-                        <div className={styles.user}>
-                            <div className={styles.header}>
-                                <div className={styles.author}>
-                                    {displayName}
-                                </div>
-                                <div className={styles.date}>
-                                    {submissionDate}
-                                </div>
-                            </div>
+  useEffect(() => {
+    const fetchReviews = async () => {
+      setPending(true);
+      const { data } = await axios.get(
+        `${BASE_URL}/api/reviews?id=${getIdFromKey(id)}`
+      );
 
-                            {authorRating && (
-                                <div className={styles.rating}>
-                                    <span>{authorRating}</span> / 10
-                                </div>
-                            )}
-                        </div>
+      setReviews(data.reviews);
+      setPending(false);
+    };
 
-                        <div className={styles.content}>
-                                <div className={styles.title}>
-                                    {reviewTitle}
-                                </div>
-                                <div className={styles.text}>
-                                    {reviewText}
-                                </div>
-                            </div>
-                    </div>
-                })}
+    fetchReviews();
+  }, [id])
+
+  
+
+  return (
+    <div className={styles.list}>
+      <h2>Reviews</h2>
+
+      {isPending ? "Loading" :
+     reviews?.length ? (
+    <div className={styles.container}>
+      <div className={styles.reviews}>
+        {reviews.map(
+          ({
+            author: { displayName, userId },
+            authorRating,
+            reviewText,
+            reviewTitle,
+            submissionDate,
+          }) => (
+            <div className={styles.review} key={userId}>
+              <div className={styles.user}>
+                <div className={styles.header}>
+                  <div className={styles.author}>{displayName}</div>
+                  <div className={styles.date}>{submissionDate}</div>
+                </div>
+
+                {authorRating && (
+                  <div className={styles.rating}>
+                    <span>{authorRating}</span> / 10
+                  </div>
+                )}
+              </div>
+
+              <div className={styles.content}>
+                <div className={styles.title}>{reviewTitle}</div>
+                <Text text={reviewText} />
+              </div>
             </div>
-          </div>
-        ) : ("No reviews yet")}
+          )
+        )}
       </div>
-    );
-  };
-  
+    </div>
+  ) : (
+    <div className={styles.results}>No reviews yet</div>
+  )
+      }
+    </div>
+  );
+};
 
-export default Reviews
+const Text = ({ text }) => {
+  const isShort = text.length <= 300; // Проверяем длину текста
+  const [isExpanded, setExpanded] = useState(false);
+
+  const toggleExpand = () => setExpanded((prev) => !prev);
+
+  return (
+    <div className={styles.text}>
+      {isExpanded || isShort ? text : `${text.slice(0, 300)}...`}
+
+      {!isShort && (
+        <div className={styles.more} onClick={toggleExpand}>
+          {isExpanded ? "Show less" : "Read more..."}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Reviews;

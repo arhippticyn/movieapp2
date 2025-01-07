@@ -1,24 +1,22 @@
-import Footer from '../components/Footer';
-import '../styles/globals.css';
-import '../styles/main.css';
-import styles from '../styles/Home.module.css';
-import { BASE_URL } from '../utils/constants';
-import { useAppStore } from '../store/store';
-import { useEffect } from 'react';
+import Footer from "../components/Footer";
+import "../styles/globals.css";
+import "../styles/main.css";
+import styles from "../styles/Home.module.css";
 import axios from "axios";
-import Head from 'next/head';
-
+import { BASE_URL } from "../utils/constants";
+import { useAppStore } from "../store/store";
+import { useEffect } from "react";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
-    const { setItems, items = [] } = useAppStore();
+  const { setItems, items = [] } = useAppStore();
 
-    useEffect(() => {
-        if (!items?.length) setItems(pageProps.data)
-        console.log(items);
-    }, [pageProps.data, setItems, items]);
-    
-    return (
-        <div className={styles.container}>
+  useEffect(() => {
+    if (!items?.length) setItems(pageProps.data);
+  }, [pageProps.data, setItems, items]);
+
+  return (
+    <div className={styles.container}>
       <Head>
         <title>The best movie APP</title>
         <meta name="description" content="Movie app" />
@@ -31,15 +29,15 @@ function MyApp({ Component, pageProps }) {
         <Footer />
       </main>
     </div>
-    );
+  );
 }
 
 MyApp.getInitialProps = async ({ Component }) => {
-    const pageProps = Component.getInitialProps;
-  
-    const { data } = await axios.get(`${BASE_URL}/api/movies`);
-  
-    return { pageProps: { ...pageProps, data } };
-  };
-  
-  export default MyApp;
+  const pageProps = Component.getInitialProps;
+
+  const { data } = await axios.get(`${BASE_URL}/api/movies`);
+
+  return { pageProps: { ...pageProps, data } };
+};
+
+export default MyApp;

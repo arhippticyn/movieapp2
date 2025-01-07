@@ -1,12 +1,13 @@
 .movie {
     display: flex;
     flex-direction: column;
+    margin-top: 50px;
 }
 
 .image {
     border-radius: 12px;
     overflow: hidden;
-    width: 120%;
+    width: 120%; 
     object-fit: cover;
 }
 
