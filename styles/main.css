@@ -12,6 +12,24 @@
     cursor: pointer;
 }
 
-.update:hover {
-    background: #f2d73b;
+.update.disabled {
+    cursor: not-allowed;
+    background: #c8c8c8;
+}
+
+.update.disabled .icon {
+    animation: rotating .5s infinite linear;
+}
+
+.update:not(.disabled):hover {
+    background: #e8d151;
+}
+
+@keyframes rotating {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(180deg);
+    }
 }

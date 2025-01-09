@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import update from "../images/refresh.png";
 import { useAppStore } from "../store/store";
@@ -10,22 +10,26 @@ const GetButton = ({ text = "Get a movie", cn = "" }) => {
   const router = useRouter();
   const { items } = useAppStore();
   const { id } = router.query;
+    const [isLoading, setLoading] = useState(false)
 
   const getMovie = () => {
-    if (!items?.length) return;
+    if (!items?.length || isLoading) return;
 
     const filtered = items.filter((item) => getIdFromKey(item) !== id);
 
     if (filtered.length) {
+      setLoading(true)
+      
+
       const randomIndex = getRandom(filtered.length);
       const newId = getIdFromKey(filtered[randomIndex]);
 
-      router.push(`/${newId}`);
+      router.push(`/${newId}`).then(() => setLoading(false))
     }
   };
 
   return (
-    <div className={`update ${cn}`} onClick={getMovie}>
+    <div className={`update ${cn} ${isLoading ? "disabled" : ""}`} onClick={getMovie}>
       <Image className="icon" src={update} alt="Refresh" width={14} height={14} />
       <span>{text}</span>
     </div>

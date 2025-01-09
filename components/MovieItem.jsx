@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import styles from '../styles/Movie.module.css'
 import Image from "next/image";
 import movieImg from '../images/default-movie.jpg'
-import { convertDuration }  from "..//utils/common"
+import { convertDuration, getIdFromKey, getRandom } from "../utils/common";
 import Cast from "./Cast";
 import Reviews from "./Reviews";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { useAppStore } from "../store/store";
+import { BASE_URL } from "../utils/constants"
 
 const MovieItem = ({ 
   id,
@@ -14,7 +18,26 @@ const MovieItem = ({
    plotOutline: shortPlot,
    genres,
   }) => {
-  const [isOpen, setOpen] = useState(false)
+    const router = useRouter();
+    const [isOpen, setOpen] = useState(false);
+    const { setItems } = useAppStore();
+    const [isLoading, setLoading] = useState(false);
+  
+    const getByGenre = async (genre) => {
+      if (isLoading) return;
+  
+      setLoading(true);
+  
+      const type = genre.replaceAll(" ", "-").toLowerCase();
+      const { data } = await axios.get(`${BASE_URL}/api/genres?genre=${type}`);
+  
+      const random = getRandom(data.length);
+      const id = getIdFromKey(data[random]);
+  
+      router.push(`${BASE_URL}/${id}`).then(() => setLoading(false));
+  
+      setItems({ data });
+    };
 
     return (<div className={styles.movie}>
         <div className={styles.title}>
@@ -54,7 +77,7 @@ const MovieItem = ({
 
          <div className={styles.genres}>
           {genres.map((genre) => (
-            <div key={genre} className={styles.genre} onClick={() => {}}>
+            <div key={genre} className={styles.genre} onClick={() => getByGenre(genre)}>
               {genre}
             </div>
           ))}
