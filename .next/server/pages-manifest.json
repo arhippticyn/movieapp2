@@ -5,6 +5,8 @@
   "/[id]": "pages/[id].js",
   "/": "pages/index.js",
   "/api/movies": "pages/api/movies.js",
-  "/api/genres": "pages/api/genres.js",
-  "/api/movie": "pages/api/movie.js"
+  "/api/search": "pages/api/search.js",
+  "/api/movie": "pages/api/movie.js",
+  "/api/cast": "pages/api/cast.js",
+  "/api/reviews": "pages/api/reviews.js"
 }
