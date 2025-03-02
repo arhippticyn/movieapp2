@@ -49,7 +49,7 @@ const Search = () => {
         if (value) {
             setTimer(setTimeout(() => {
                 handleSearch(value)
-            }, 700))
+            }, 1000))
         }
     }
 

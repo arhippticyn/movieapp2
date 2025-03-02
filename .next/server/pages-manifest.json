@@ -3,10 +3,9 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/[id]": "pages/[id].js",
-  "/": "pages/index.js",
+  "/actor/[id]": "pages/actor/[id].js",
+  "/api/actor": "pages/api/actor.js",
   "/api/movies": "pages/api/movies.js",
-  "/api/search": "pages/api/search.js",
   "/api/movie": "pages/api/movie.js",
-  "/api/cast": "pages/api/cast.js",
-  "/api/reviews": "pages/api/reviews.js"
+  "/api/search": "pages/api/search.js"
 }
