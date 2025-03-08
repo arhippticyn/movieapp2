@@ -4,8 +4,5 @@
   "/_document": "pages/_document.js",
   "/[id]": "pages/[id].js",
   "/actor/[id]": "pages/actor/[id].js",
-  "/api/actor": "pages/api/actor.js",
-  "/api/movies": "pages/api/movies.js",
-  "/api/movie": "pages/api/movie.js",
-  "/api/search": "pages/api/search.js"
+  "/": "pages/index.js"
 }

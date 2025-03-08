@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import GetButton from "./GetButton";
 import styles from '../styles/Actor.module.css';
+import ActorFilms from "./ActorFilms";
 
 const ActorItem = ({ 
     id, 
@@ -45,8 +46,10 @@ const ActorItem = ({
                 </div>
                 </div>
 
+                {isOpen && <ActorFilms id={id} />}
+
                 <div className={styles.more} onClick={() => setOpen(!isOpen)}>
-                    {isOpen ? 'Hide Filmography' : 'Show Filmography'}
+                    {isOpen ?'Hide' : 'Show' } Filmography
                 </div>
             </div>
         </div>
