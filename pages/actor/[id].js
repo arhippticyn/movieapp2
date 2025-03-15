@@ -1,9 +1,8 @@
 import axios from "axios";
 import Head from "next/head";
-// import GetButton from "../components/GetButton";
-// import MovieItem from "../components/MovieItem";
-import { BASE_URL } from "../../utils/constants";
+
 import ActorItem from "../../components/ActorItem";
+import { BASE_URL } from "../../utils/constants";
 
 export default function Actor({ actor }) {
   return (

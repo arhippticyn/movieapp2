@@ -6,30 +6,28 @@ import { BASE_URL } from "../utils/constants";
 import styles from "../styles/Film.module.css";
 import Link from "next/link";
 
+
 const ActorFilms = ({ id }) => {
-    const [films, setFilms] = useState([])
-    const [isLoading, setLoading]  = useState(false)
-    useEffect(() => {
-        const fetchFilms = async () => {
-            setLoading(true)
-            console.log("ID актера:", getIdFromKey(id));
+  const [films, setFilms] = useState([]);
+  const [isLoading, setLoading] = useState(false);
 
-            const { data } = await axios.get(
-                `${BASE_URL}/api/filmography?id=${getIdFromKey(id)}`
-              );
-              
+  useEffect(() => {
+    const fetchFilms = async () => {
+      setLoading(true);
+      const { data } = await axios.get(
+        `${BASE_URL}/api/filmography?id=${getIdFromKey(id)}`
+      );
 
-        
+      const filtered = data.filmography.filter(({ status, titleType }) => {
+        return status === "released" && titleType === "movie";
+      });
 
-        const filtered = data.filmography.filter(({ status, titleType }) => {
-            return status === 'released' && titleType === 'movie'
-        })
-        setFilms(filtered.filter((_, i) => i < 20))
-        setLoading(false)
-    }
+      setFilms(filtered.filter((_, i) => i < 20));
+      setLoading(false);
+    };
 
-    fetchFilms()
-    }, [id])
+    fetchFilms();
+  }, [id]);
 
     return (
         <div className={styles.films}>
