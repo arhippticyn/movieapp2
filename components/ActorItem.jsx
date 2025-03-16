@@ -46,11 +46,6 @@ const ActorItem = ({
                 </div>
                 </div>
 
-                {isOpen && <ActorFilms id={id} />}
-
-                <div className={styles.more} onClick={() => setOpen(!isOpen)}>
-                    {isOpen ?'Hide' : 'Show' } Filmography
-                </div>
             </div>
         </div>
     )

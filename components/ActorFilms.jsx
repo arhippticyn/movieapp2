@@ -18,6 +18,8 @@ const ActorFilms = ({ id }) => {
         `${BASE_URL}/api/filmography?id=${getIdFromKey(id)}`
       );
 
+      console.log(data);
+
       const filtered = data.filmography.filter(({ status, titleType }) => {
         return status === "released" && titleType === "movie";
       });
@@ -27,15 +29,15 @@ const ActorFilms = ({ id }) => {
     };
 
     fetchFilms();
-  }, [id]);
+  }, [id])
 
     return (
         <div className={styles.films}>
             <h2>Filmography</h2>
 
             <div className={styles.list}>
-                {isLoading ? "Loading" : films.map(({ characters, id, image, title, year  }) => (
-                     <Link href={`${BASE_URL}/${getIdFromKey(id)}`} key={id}>
+                {isLoading ? "Loading" :  films.map(({ characters, id, image, title, year }) => (
+            <Link href={`${BASE_URL}/${getIdFromKey(id)}`} key={id}>
                      <a className={styles.item}>
                        <div
                          className={styles.image}

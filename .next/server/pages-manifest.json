@@ -2,7 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/api/movies": "pages/api/movies.js",
-  "/actor/[id]": "pages/actor/[id].js",
-  "/api/actor": "pages/api/actor.js"
+  "/actor/[id]": "pages/actor/[id].js"
 }
