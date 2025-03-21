@@ -2,5 +2,10 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/actor/[id]": "pages/actor/[id].js"
+  "/actor/[id]": "pages/actor/[id].js",
+  "/[id]": "pages/[id].js",
+  "/api/cast": "pages/api/cast.js",
+  "/api/movies": "pages/api/movies.js",
+  "/api/movie": "pages/api/movie.js",
+  "/api/reviews": "pages/api/reviews.js"
 }
