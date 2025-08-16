@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import styles from "../styles/Actor.module.css";
-import ActorFilms from "./ActorFilms";
 import GetButton from "./GetButton";
 
 const ActorItem = ({
