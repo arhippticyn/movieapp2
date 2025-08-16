@@ -17,7 +17,16 @@ export const request = async ({ url, params = {} }) => {
   return data;
 };
 
-export const getIdFromKey = (str) => str.split("/")[2];
+export const getIdFromKey = (str = "") => {
+  if (!str) return "";
+  // Если строка уже просто nconst
+  if (/^nm\d+$/.test(str)) return str;
+
+  // Если формат "/name/nm0000123/"
+  const parts = str.split("/");
+  return parts.find((p) => /^nm\d+$/.test(p)) || "";
+};
+
 
 export const convertDuration = (total) => {
   const minutes = total % 60;
